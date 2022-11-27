@@ -41,6 +41,7 @@ async function run() {
         const brandCollection = client.db('mobileShop').collection('brandDetails');
         const bookingsCollection = client.db('mobileShop').collection('bookings');
         const usersCollection = client.db('mobileShop').collection('users');
+        const addProductCollection = client.db('mobileShop').collection('addProduct');
         
 
         app.get('/services', async (req, res) => {
@@ -142,6 +143,23 @@ async function run() {
             }
             const result = await usersCollection.updateOne(filter, updatedDoc, options);
             res.send(result);
+        })
+        app.get('/sell', async(req, res) =>{
+            let query = {};
+            if(req.query.email){
+                query = {
+                    email: req.query.email
+                }
+            }
+            const cursor = addProductCollection.find(query);
+            const sells = await cursor.toArray();
+            res.send(sells);
+        })
+        app.post('/sells', async(req, res) =>{
+            const  order = req.body;
+            const result = await addProductCollection.insertOne(order);
+            res.send(result);
+
         })
 
     }
