@@ -100,18 +100,21 @@ async function run() {
             const result = await usersCollection.insertOne(user);
             res.send(result);
         });
-        app.get('/users/seller/:email'), async (req, res) =>{
-          const email = req.params.email;
-          const query = { email }
-          const user = await usersCollection.findOne(query);
-          res.send({isSeller: user?.role === 'seller'});
-        }
-        app.get('/users/buyer/:email'), async (req, res) =>{
+       
+          app.get ('/users/sellers/:email', async (req, res) =>{
+            const email = req.params.email;
+            console.log(req.params.email);
+            const query = { email }
+            const user = await usersCollection.findOne(query);
+            res.send({isSeller: user?.role === 'seller'});
+          })
+
+        app.get('/users/buyer/:email', async (req, res) =>{
             const email = req.params.email;
             const query = { email }
             const user = await usersCollection.findOne(query);
             res.send({isSeller: user?.role === 'buyer'});
-          }
+          })
 
         app.get('/users/admin/:email', async (req, res) =>{
             const email = req.params.email;
