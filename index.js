@@ -153,12 +153,7 @@ async function run() {
             const sells = await cursor.toArray();
             res.send(sells);
         })
-        // app.get('/users', async(req, res) =>{
-        //     const query = {};
-        //     const users = await usersCollection.find(query).toArray();
-        //     res.send(users);
-        // })
-       
+      
         app.post('/sells', async(req, res) =>{
             const  order = req.body;
             const result = await brandCollection.insertOne(order);
