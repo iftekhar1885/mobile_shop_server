@@ -41,8 +41,6 @@ async function run() {
         const brandCollection = client.db('mobileShop').collection('brandDetails');
         const bookingsCollection = client.db('mobileShop').collection('bookings');
         const usersCollection = client.db('mobileShop').collection('users');
-        const addProductCollection = client.db('mobileShop').collection('addProduct');
-        
 
         app.get('/services', async (req, res) => {
             const query = {}
