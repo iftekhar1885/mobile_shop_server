@@ -151,15 +151,48 @@ async function run() {
                     email: req.query.email
                 }
             }
-            const cursor = addProductCollection.find(query);
+            const cursor = brandCollection.find(query);
             const sells = await cursor.toArray();
             res.send(sells);
         })
+        // app.get('/users', async(req, res) =>{
+        //     const query = {};
+        //     const users = await usersCollection.find(query).toArray();
+        //     res.send(users);
+        // })
+       
         app.post('/sells', async(req, res) =>{
             const  order = req.body;
-            const result = await addProductCollection.insertOne(order);
+            const result = await brandCollection.insertOne(order);
             res.send(result);
 
+        })
+
+        // app.put('/sell/:id', async (req, res) =>{
+        //     const id = req.params.id;
+        //     const filter = {_id: ObjectId(id) };
+        //     const options = { upsert: true }
+           
+        //     const updatedDoc = {
+        //         $set: {
+        //             advertise: true
+        //         }
+        //     }
+        //     const result = await brandCollection.updateOne(filter, updatedDoc, options)
+        //     res.send(result);
+        // })
+
+        // app.get('/addproduct', async(req, res) =>{
+        //     const filter = {advertise: true }
+        //     const result = await brandCollection.find(filter).toArray()
+        //     res.send(result);
+        // })
+        
+        app.delete('/sell/:id', async(req, res) =>{
+            const id = req.params.id;
+            const query = {_id: ObjectId(id) };
+            const result = await brandCollection.deleteOne(query);
+            res.send(result);
         })
 
     }
