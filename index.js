@@ -166,25 +166,25 @@ async function run() {
 
         })
 
-        // app.put('/sell/:id', async (req, res) =>{
-        //     const id = req.params.id;
-        //     const filter = {_id: ObjectId(id) };
-        //     const options = { upsert: true }
+        app.put('/sell/:id', async (req, res) =>{
+            const id = req.params.id;
+            const filter = {_id: ObjectId(id) };
+            const options = { upsert: true }
            
-        //     const updatedDoc = {
-        //         $set: {
-        //             advertise: true
-        //         }
-        //     }
-        //     const result = await brandCollection.updateOne(filter, updatedDoc, options)
-        //     res.send(result);
-        // })
+            const updatedDoc = {
+                $set: {
+                    advertise: true
+                }
+            }
+            const result = await brandCollection.updateOne(filter, updatedDoc, options)
+            res.send(result);
+        })
 
-        // app.get('/addproduct', async(req, res) =>{
-        //     const filter = {advertise: true }
-        //     const result = await brandCollection.find(filter).toArray()
-        //     res.send(result);
-        // })
+        app.get('/addproduct', async(req, res) =>{
+            const filter = {advertise: true }
+            const result = await brandCollection.find(filter).toArray()
+            res.send(result);
+        })
         
         app.delete('/sell/:id', async(req, res) =>{
             const id = req.params.id;
